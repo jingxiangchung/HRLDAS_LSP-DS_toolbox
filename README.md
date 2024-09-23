@@ -1,4 +1,4 @@
-# HRLDAS_LSP-DS_toolbox
+# HRLDAS-LSP-DS Toolbox
 This repo hosts some scripts written to aid in the application of HRLDAS LSP-DS
 
 Scripts available:
