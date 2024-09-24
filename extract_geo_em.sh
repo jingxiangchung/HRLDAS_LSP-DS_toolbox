@@ -49,9 +49,9 @@ cdo zonmean -selvar,XLAT_M ${ifile} ${geo_var}_lat_${ifile}.tmp1
 
 #3. Append the correct lon and lat to ${geo_var}
 #netCDF4 cannot work in such a way
-ncks -3 ${geo_var}_${ifile}.tmp3 ${geo_var}_${ifile}; rm ${geo_var}_${ifile}.tmp3
-ncks -3 lat.nc lat.nc3; rm lat.nc
-ncks -3 lon.nc lon.nc3; rm lon.nc
+ncks -O -3 ${geo_var}_${ifile}.tmp3 ${geo_var}_${ifile}; rm ${geo_var}_${ifile}.tmp3
+ncks -O -3 lat.nc lat.nc3; rm lat.nc
+ncks -O -3 lon.nc lon.nc3; rm lon.nc
 
 ncks -A -h -v lat lat.nc3 ${geo_var}_${ifile}
 ncks -A -h -v lon lon.nc3 ${geo_var}_${ifile}
