@@ -6,7 +6,7 @@ Scripts available:
    
    Usage: bash extract_geo_em.sh <geo_em file> <variable wanted>, e.g. : bash extract_geo_em.sh geo_em.d01.nc LU_INDEX
 
-2. hrldas_deploy.sh, script to set up the HRLDAS LSP-DS (https://github.com/xuelingbo/LSP-DS, accessed 23/9/2024).
+2. hrldas_deploy.sh, script to set up the HRLDAS LSP-DS (https://github.com/xuelingbo/LSP-DS, accessed 23/9/2024) to be ran in a folder of your choice.
 
    Might need to run "pip3 install basemap setuptools pandas xarray eccodes netCDF4 h5netcdf scipy rioxarray cfgrib" after that, before we can run the model.
    
