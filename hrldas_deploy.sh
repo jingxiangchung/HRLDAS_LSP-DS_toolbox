@@ -33,6 +33,7 @@ domain_area='3.44, 101.15, 2.75, 101.95'
 echo "[hrldas_deploy] calculating the number of simulation days..."
 let kday=($(date +%s -d ${end_date})-$(date +%s -d ${start_date}))/86400
 [[ ${kday} < 0 ]] && echo "ERROR: start_date > end_date, did you specified them reversely?" && exit
+kday=$((kday+1))
 
 #----------------------------------------------------------------
 
