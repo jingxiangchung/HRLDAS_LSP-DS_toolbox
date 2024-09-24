@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/3c9d0498-0e2f-42df-9f92-de16cb6319be)# HRLDAS-LSP-DS Toolbox
+# HRLDAS-LSP-DS Toolbox
 This repo hosts some scripts written to aid in the application of HRLDAS LSP-DS
 
 Scripts available:
