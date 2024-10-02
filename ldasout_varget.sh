@@ -87,7 +87,7 @@ for var in ${var_list}; do
 	done
 
 	cdo -O mergetime ${outdir}/${var}_????.LDASOUT ${outdir}/${var}_${year_start}-${year_end}.LDASOUT.tmp1
-	cdo setcalendar,standard -settaxis,${year_start}-${mm}-01,00:00:00,1hour -setctomiss,-9999 -setctomiss,-1.e+33 -setctomiss,NaNf ${outdir}/${var}_${year_start}-${year_end}.LDASOUT.tmp1 ${outdir}/${var}_${year_start}-${year_end}.LDASOUT.tmp2
+	cdo setcalendar,standard -settaxis,${year_start}-${mon_start}-01,00:00:00,1hour -setctomiss,-9999 -setctomiss,-1.e+33 -setctomiss,NaNf ${outdir}/${var}_${year_start}-${year_end}.LDASOUT.tmp1 ${outdir}/${var}_${year_start}-${year_end}.LDASOUT.tmp2
 	ncrename -O -d south_north,lat -d west_east,lon ${outdir}/${var}_${year_start}-${year_end}.LDASOUT.tmp2 ${outdir}/${var}_${year_start}-${year_end}.LDASOUT
 	ncks -A -h -v lat lat.nc3 ${outdir}/${var}_${year_start}-${year_end}.LDASOUT
 	ncks -A -h -v lon lon.nc3 ${outdir}/${var}_${year_start}-${year_end}.LDASOUT
