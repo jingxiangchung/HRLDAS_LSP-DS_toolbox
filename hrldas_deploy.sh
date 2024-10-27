@@ -118,6 +118,13 @@ echo "...fixing the yearly setup file creation issue..."
 sed -i '55,57d' run_HRLDAS_era5.py
 echo "$(awk -v n=52 -v s="create_setup_file(f'{str(start_year)}-{loop_start_date}',dir_raw, dir_hrldas,geo_em_file)" 'NR == n {print s} {print}' run_HRLDAS_era5.py)" > run_HRLDAS_era5.py
 
+#----------------------------------------------------------------
+
+#5. Fixing ZR issue in URBPARM_LCZ.TBL
+
+echo "[hrldas_deploy] preparing URBPARM_LCZ.TBL file..."
+sed -i 's/ZR: 37.5, 17.5, 6.5, 37.5, 17.5, 6.5, 3., 6.5, 6.5, 10., 10./ZR: 29.5, 17.5, 6.5, 29.5, 17.5, 6.5, 3., 6.5, 6.5, 10., 10./g' URBPARM_LCZ.TBL
+
 echo "[hrldas_deploy] Job completed!"
 echo "IMPORTANT: Please open and check 'namelist.hrldas' and 'run_HRLDAS_era5.py' carefully!"
 echo "           Make appropriate changes if needed before running HRLDAS!"
