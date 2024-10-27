@@ -113,6 +113,11 @@ sed -i "s|= '../test/ERA5/raw/'|= '`pwd`/${raw_dir}/'|g;s|= '../test/ERA5/geo/ge
 echo "...changing python to python3 at line 41 of run_HRLDAS_era5.py..."
 sed -i 's/os.system(f"python/os.system(f"python3/g' run_HRLDAS_era5.py
 
+#f. Fix yearly setup file creating issue
+echo "...fixing the yearly setup file creation issue..."
+sed -i '55,57d' run_HRLDAS_era5.py
+echo "$(awk -v n=52 -v s="create_setup_file(f'{str(start_year)}-{loop_start_date}',dir_raw, dir_hrldas,geo_em_file)" 'NR == n {print s} {print}' run_HRLDAS_era5.py)" > run_HRLDAS_era5.py
+
 echo "[hrldas_deploy] Job completed!"
 echo "IMPORTANT: Please open and check 'namelist.hrldas' and 'run_HRLDAS_era5.py' carefully!"
 echo "           Make appropriate changes if needed before running HRLDAS!"
