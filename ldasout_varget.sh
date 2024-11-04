@@ -31,7 +31,7 @@ year_end=2023
 #Month start
 mon_start=02
 
-#Month end
+#Month end (should the simulation is cross years, put mon_end as 12)
 mon_end=02
 #---------------------------------------------------------------
 
