@@ -17,22 +17,22 @@ domain_file='./geo_em.d01.nc'
 indir='hrldas_simulation/LDASOUT'
 
 #Output folder (to store ldasout_fix.sh output)
-outdir='LDASOUT_extract'
+outdir='LDASOUT_extract_1000m'
 
 #Variable wanted
-var_list='T2 RH2 RAINRATE'
+var_list='T2 RH2'
 
 #Year start
-year_start=2023
+year_start=2010
 
 #Year end
 year_end=2023
 
 #Month start
-mon_start=02
+mon_start=01
 
 #Month end (should the simulation is cross years, put mon_end as 12)
-mon_end=02
+mon_end=12
 #---------------------------------------------------------------
 
 [[ ! -d ${outdir} ]] && mkdir -p ${outdir}
@@ -75,7 +75,14 @@ for var in ${var_list}; do
 			ifile_list=`ls ${indir}/${y}${mm}????.LDASOUT_DOMAIN?`
 			for ifile in ${ifile_list}; do
 				ofile=`basename ${ifile}`
-				cdo selvar,${var} ${ifile} ${outdir}/${var}_${ofile}
+
+				dataoridate=`echo ${ofile} | cut -d "." -f 1`
+				yyyy=${dataoridate:0:4}
+				mmmm=${dataoridate:4:2}
+				dddd=${dataoridate:6:2}
+				hhhh=${dataoridate:8:2}
+				cdo setcalendar,standard -settaxis,${yyyy}-${mmmm}-${dddd},${hhhh}:00:00,1hour -setctomiss,-9999 -setctomiss,-1.e+33 -setctomiss,NaNf -selvar,${var} ${ifile} ${outdir}/${var}_${ofile}
+
 			done
 			
 			cdo -O mergetime ${outdir}/${var}_${y}${mm}????.LDASOUT_DOMAIN? ${outdir}/${var}_${y}${mm}.LDASOUT
@@ -87,8 +94,7 @@ for var in ${var_list}; do
 	done
 
 	cdo -O mergetime ${outdir}/${var}_????.LDASOUT ${outdir}/${var}_${year_start}-${year_end}.LDASOUT.tmp1
-	cdo setcalendar,standard -settaxis,${year_start}-${mon_start}-01,00:00:00,1hour -setctomiss,-9999 -setctomiss,-1.e+33 -setctomiss,NaNf ${outdir}/${var}_${year_start}-${year_end}.LDASOUT.tmp1 ${outdir}/${var}_${year_start}-${year_end}.LDASOUT.tmp2
-	ncrename -O -d south_north,lat -d west_east,lon ${outdir}/${var}_${year_start}-${year_end}.LDASOUT.tmp2 ${outdir}/${var}_${year_start}-${year_end}.LDASOUT
+	ncrename -O -d south_north,lat -d west_east,lon ${outdir}/${var}_${year_start}-${year_end}.LDASOUT.tmp1 ${outdir}/${var}_${year_start}-${year_end}.LDASOUT
 	ncks -A -h -v lat lat.nc3 ${outdir}/${var}_${year_start}-${year_end}.LDASOUT
 	ncks -A -h -v lon lon.nc3 ${outdir}/${var}_${year_start}-${year_end}.LDASOUT
 		rm ${outdir}/${var}_????.LDASOUT ${outdir}/${var}_${year_start}-${year_end}.LDASOUT.tmp?
