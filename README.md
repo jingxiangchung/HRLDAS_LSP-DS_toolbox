@@ -12,4 +12,4 @@ Scripts:
 
    ii. I cannot get Intel OneAPI's compilers to compile Jasper 1.9, thus I am using GNU compilers instead.
 
-2. to be added.
+2. locate_cmlcz.sh: a script to identify which CGLC_MODIS_LCZ files to edit based on our simulation domain set.
