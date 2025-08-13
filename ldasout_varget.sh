@@ -13,7 +13,7 @@
 #Domain file used to run HRLDAS (to extract lon and lat for HRLDAS output)
 domain_file='./geo_em.d01.nc'
 
-#Directory where HRLDAS output is located
+#Directory where HRLDAS output is located (I put the files for each year in each year folders)
 indir='/mnt/h/HRLDAS_GKL_500m/????'
 
 #Output folder (to store ldasout_fix.sh output)
