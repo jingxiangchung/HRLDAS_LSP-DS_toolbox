@@ -16,3 +16,4 @@ Scripts:
 3. edit_cmLCZ.sh: a script to help preparing the python codes needed to edit CGLC_MODIS_LCZ files based on the LULC tif images obtained from Manila Observatory.
 4. nc3to4z_hrldas.sh: a script to convert HRLDAS output to netCDF4-zip.
 5. ldasout_varget.sh: a script to extract HRLDAS output for the variables wanted and fix the weird behaviour of the output files.
+6. hrldas_deploy.sh: a script to deploy HRLDAS for running our simulations.
