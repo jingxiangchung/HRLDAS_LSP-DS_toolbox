@@ -18,17 +18,17 @@ dlat_B=2.53
 dlat_T=3.47
 
 #Directory storing the original CGLC_MODIS_LCZ_global files
-cmlcz_ori_dir='/mnt/f/HRLDAS_simulations/WPS_GEOG/CGLC_MODIS_LCZ_global'
+cmlcz_ori_dir='/mnt/z/HRLDAS_simulations/WPS_GEOG/CGLC_MODIS_LCZ_global'
 
 #Directory containing CGLC_MODIS_LCZ_global files copied by "locate_cmlcz.sh"
 cmlcz_src_dir='./CGLC_MODIS_LCZ_global_mod'
 
 #Folder containing LULC tif files and which tif file to use
-tif_dir='./GKL_landsat_tif'
-tif_file='KL_LULC_merged_100m.tif'
+tif_dir='./landsat8_2021_GKL'
+tif_file='KL_LULC_2021_merged_100.tif'
 
 #Where you want to store the edited CGLC_MODIS_LCZ_global files?
-odir='data-CGLC-2001'
+odir='data-CGLC-2021'
 
 #-----------------------
 ##Installing needed modules
@@ -430,8 +430,28 @@ sed -i "s|savePath = mainFolder / 'data-CGLC-2001/'|savePath = Path('${odir}')|g
 sed -i "s|updateDA = xr.open_dataset(landsatFilePath / 'HAN_LULC_100m_reproject_fnl.tif')|updateDA = xr.open_dataset(landsatFilePath / '${outtif}_reproject_regrid.tif')|g" 03_LULCupdate_2001_updated.py
 sed -i "s|update(binaryFilePath / file, updateDA, savepath=savePath)|update(file, updateDA, savepath=savePath)|g" 03_LULCupdate_2001_updated.py
 
-rm 01_tiff_reproject_template.py 02_tiff_regrid100_template.py 03_LULCupdate_2001_template.py
+rm -rf 01_tiff_reproject_template.py 02_tiff_regrid100_template.py 03_LULCupdate_2001_template.py
+
+#-----------------------
+#Running the necessary Python codes and link the edited CGLC-MODIS-LCZ files back to its original path
 
 [[ ! -d ${odir} ]] && mkdir -p ${odir}
+[[ ! -f ${cmlcz_src_dir}/??????-??????.??????-??????Default.tif ]] && rm -rf ${cmlcz_src_dir}/??????-??????.??????-??????Default.tif
+
+python 01_tiff_reproject_updated.py 
+python 02_tiff_regrid100_updated.py 
+python 03_LULCupdate_2001_updated.py
+
+cmLCZ_edited_list=`ls ${odir}/??????-??????.??????-??????Updated.tif | sed 's/Updated.tif//g'`
+odir_fullpath=`realpath ${odir}`
+
+for cfile in ${cmLCZ_edited_list}; do
+
+	bin_file=`basename ${cfile}`
+	[[ ! -f ${cmlcz_ori_dir}/${bin_file}.bak ]] && echo "Creating backup for file ${bin_file}..." && mv ${cmlcz_ori_dir}/${bin_file} ${cmlcz_ori_dir}/${bin_file}.bak
+	echo "Linking file ${odir_fullpath}/${bin_file} to ${cmlcz_ori_dir}..."
+	ln -s ${odir_fullpath}/${bin_file} ${cmlcz_ori_dir}
+
+done
 
 echo "Job completed!"
