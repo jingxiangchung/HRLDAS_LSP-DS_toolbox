@@ -21,8 +21,8 @@ cmlcz_dir='/mnt/f/HRLDAS_simulations/WPS_GEOG/CGLC_MODIS_LCZ_global'
 #Where to keep the copied files for editing?
 odir='./CGLC_MODIS_LCZ_global_mod'
 
-xinc=1089
-yinc=10973
+xinc=1089  #The increment of x in the binary file names, you shouldn't need to change it
+yinc=10973 #The increment of y in the binary file names, you shouldn't need to change it
 
 #------------------------------------------------------------------
 ##Program start, DO NOT change anything after here unless you know what you are doing...
