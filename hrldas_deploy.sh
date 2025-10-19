@@ -125,6 +125,13 @@ echo "$(awk -v n=52 -v s="create_setup_file(f'{str(start_year)}-{loop_start_date
 echo "[hrldas_deploy] preparing URBPARM_LCZ.TBL file..."
 sed -i 's/ZR: 37.5, 17.5, 6.5, 37.5, 17.5, 6.5, 3., 6.5, 6.5, 10., 10./ZR: 29.5, 17.5, 6.5, 29.5, 17.5, 6.5, 3., 6.5, 6.5, 10., 10./g' URBPARM_LCZ.TBL
 
+#----------------------------------------------------------------
+
+#6. Fixing np.nan in create_forcing.py
+sed -i 's/np.NaN/np.nan/g' create_forcing.py
+
+#----------------------------------------------------------------
+
 echo "[hrldas_deploy] Job completed!"
 echo "IMPORTANT: Please open and check 'namelist.hrldas' and 'run_HRLDAS_era5.py' carefully!"
 echo "           Make appropriate changes if needed before running HRLDAS!"
