@@ -17,3 +17,5 @@ Scripts:
 4. nc3to4z_hrldas.sh: a script to convert HRLDAS output to netCDF4-zip.
 5. ldasout_varget.sh: a script to extract HRLDAS output for the variables wanted and fix the weird behaviour of the output files.
 6. hrldas_deploy.sh: a script to deploy HRLDAS for running our simulations.
+
+Folder "LULC_Update" contains Python codes written by Manila Observatory's researcher used to update the LULC of CGLC_MODIS_LCZ.
