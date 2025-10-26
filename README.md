@@ -17,3 +17,5 @@ Scripts:
 4. nc3to4z_hrldas.sh: a script to convert HRLDAS output to netCDF4-zip.
 5. ldasout_varget.sh: a script to extract HRLDAS output for the variables wanted and fix the weird behaviour of the output files.
 6. hrldas_deploy.sh: a script to deploy HRLDAS for running our simulations.
+7. extract_geo_em.sh: a script to extract the variable wanted stored in WRF geo_em file generated using geogrid.exe. CDO and NCO are required.
+8. LULC_getinfo.sh: a script to extract the LULU information from WRF geo_em file's LU_INDEX to a .csv file. Required file 'cmLCZ_LULC_code.dat'. Please extract LU_INDEX from the geo_em file using "extract_geo_em.sh" first before running this script.
