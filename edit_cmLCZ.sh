@@ -17,15 +17,15 @@ dlat_B=2.53
 #Domain top-most latitude
 dlat_T=3.47
 
-#Directory storing the original CGLC_MODIS_LCZ_global files
-cmlcz_ori_dir='/mnt/z/HRLDAS_simulations/WPS_GEOG/CGLC_MODIS_LCZ_global'
+##Directory storing the original CGLC_MODIS_LCZ_global files
+#cmlcz_ori_dir='/mnt/z/HRLDAS_simulations/WPS_GEOG/CGLC_MODIS_LCZ_global'
 
 #Directory containing CGLC_MODIS_LCZ_global files copied by "locate_cmlcz.sh"
 cmlcz_src_dir='./CGLC_MODIS_LCZ_global_mod'
 
 #Folder containing LULC tif files and which tif file to use
-tif_dir='./landsat8_2021_GKL'
-tif_file='KL_LULC_2021_merged_100.tif'
+tif_dir='./landsat8_2021_GKL_v2'
+tif_file='KL2020_LULC_100m.tif'
 
 #Where you want to store the edited CGLC_MODIS_LCZ_global files?
 odir='data-CGLC-2021'
@@ -442,16 +442,18 @@ python 01_tiff_reproject_updated.py
 python 02_tiff_regrid100_updated.py 
 python 03_LULCupdate_2001_updated.py
 
-cmLCZ_edited_list=`ls ${odir}/??????-??????.??????-??????Updated.tif | sed 's/Updated.tif//g'`
-odir_fullpath=`realpath ${odir}`
+echo "All edited files can be found in ${odir}" 
 
-for cfile in ${cmLCZ_edited_list}; do
+#cmLCZ_edited_list=`ls ${odir}/??????-??????.??????-??????Updated.tif | sed 's/Updated.tif//g'`
+#odir_fullpath=`realpath ${odir}`
 
-	bin_file=`basename ${cfile}`
-	[[ ! -f ${cmlcz_ori_dir}/${bin_file}.bak ]] && echo "Creating backup for file ${bin_file}..." && mv ${cmlcz_ori_dir}/${bin_file} ${cmlcz_ori_dir}/${bin_file}.bak
-	echo "Linking file ${odir_fullpath}/${bin_file} to ${cmlcz_ori_dir}..."
-	ln -s ${odir_fullpath}/${bin_file} ${cmlcz_ori_dir}
+#for cfile in ${cmLCZ_edited_list}; do
 
-done
+#	bin_file=`basename ${cfile}`
+#	[[ ! -f ${cmlcz_ori_dir}/${bin_file}.bak ]] && echo "Creating backup for file ${bin_file}..." && mv ${cmlcz_ori_dir}/${bin_file} ${cmlcz_ori_dir}/${bin_file}.bak
+#	echo "Linking file ${odir_fullpath}/${bin_file} to ${cmlcz_ori_dir}..."
+#	ln -s ${odir_fullpath}/${bin_file} ${cmlcz_ori_dir}
+
+#done
 
 echo "Job completed!"
