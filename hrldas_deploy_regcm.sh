@@ -126,6 +126,13 @@ sed -i 's/ZR: 37.5, 17.5, 6.5, 37.5, 17.5, 6.5, 3., 6.5, 6.5, 10., 10./ZR: 29.5,
 
 #----------------------------------------------------------------
 
+#6. Fixing create_forcing_prl.py
+
+echo "[hrldas_deploy] fixing create_forcing_prl.py..."
+sed -i "s|_{levelist}_{gcm_name}_{scenario}_pressure_layer.nc|_{gcm_name}_{scenario}_pressure_level.nc|g" create_forcing_prl.py
+
+#----------------------------------------------------------------
+
 echo "[hrldas_deploy] Job completed!"
 echo "IMPORTANT: Please open and check 'namelist.hrldas' and 'run_HRLDAS_regcm.py' carefully!"
 echo "           Make appropriate changes if needed before running HRLDAS!"
