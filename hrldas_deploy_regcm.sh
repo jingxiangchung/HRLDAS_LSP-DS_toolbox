@@ -99,7 +99,6 @@ else
         list=`seq -w 01 12`
         loop_start='01-01'
         loop_end='12-31'
-
 fi
 
 mm_list=`echo ${list} | sed "s/ /','/g;s/^/'/g;s/$/'/g"`
