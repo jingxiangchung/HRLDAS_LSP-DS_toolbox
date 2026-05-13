@@ -32,6 +32,9 @@ domain_area='30, 88.5, -15, 147.5'
 gcm_name='EC-Earth3-Veg'
 scenario='historical'
 
+#Number of cores to use for generating the forcing files
+numcores='2'
+
 #---------------------------------------------------------------
 #Program start
 #0. Calculate how many days of simulations.
@@ -115,6 +118,10 @@ sed -i "s|= '/home/admin/WRF/RUN/LSP-DS/Data_114/run_regcm/RegCM_Data/CMCC-ESM2/
 #d. model information
 echo "...adding in forcing information..."
 sed -i "s|CMCC-ESM2|${gcm_name}|g;s|ssp245|${scenario}|g" run_HRLDAS_regcm.py
+
+#e. number of cores to generate forcing
+echo "...adding in number of cores information..."
+sed -i "s|num_cores = 20|num_cores = ${numcores}|g" run_HRLDAS_regcm.py
 
 #----------------------------------------------------------------
 
