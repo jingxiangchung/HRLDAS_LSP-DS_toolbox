@@ -68,7 +68,8 @@ sed -i "s:/home/xue/Documents/LSP-DS/test/ERA5/LDASIN/HRLDAS_setup_2020080100_d2
 echo "...adding in information on simulations start date and days..."
 YYYY=${start_date:0:4}; MM=${start_date:4:2}; DD=${start_date:6:2}
 
-hrldas_kday=$((kday-1))
+#hrldas_kday=$((kday-1))
+hrldas_day=${kday}
 sed -i "s:START_YEAR  = 2020:START_YEAR  = ${YYYY}:g;s:START_MONTH = 08:START_MONTH = ${MM}:g;s:START_DAY   = 01:START_DAY   = ${DD}:g;s:KDAY = 31:KDAY = ${hrldas_kday}:g" namelist.hrldas
 
 #c. Turn on WUDAPT_LCZ
