@@ -94,7 +94,8 @@ for var in ${var_list}; do
         done
 
         cdo -O mergetime ${outdir}/${var}_????.LDASOUT ${outdir}/${var}_${year_start}-${year_end}.LDASOUT.tmp1
-        ncrename -O -d south_north,lat -d west_east,lon ${outdir}/${var}_${year_start}-${year_end}.LDASOUT.tmp1 ${outdir}/${var}_${year_start}-${year_end}.LDASOUT
+        ncrename -O -d south_north,lat -d west_east,lon ${outdir}/${var}_${year_start}-${year_end}.LDASOUT.tmp1 ${outdir}/${var}_${year_start}-${year_end}.LDASOUT.tmp2
+        ncks -O ${outdir}/${var}_${year_start}-${year_end}.LDASOUT.tmp2 ${outdir}/${var}_${year_start}-${year_end}.LDASOUT
         ncks -A -h -v lat lat.nc3 ${outdir}/${var}_${year_start}-${year_end}.LDASOUT
         ncks -A -h -v lon lon.nc3 ${outdir}/${var}_${year_start}-${year_end}.LDASOUT
                 rm ${outdir}/${var}_????.LDASOUT ${outdir}/${var}_${year_start}-${year_end}.LDASOUT.tmp?
