@@ -15,6 +15,9 @@ geo_var=${2}
 [[ ${ifile} == "" ]] && echo "Please provide geo_em file wanted!" && exit
 [[ ${geo_var} == "" ]] && echo "Please provide geo_em file's variable wanted!" && exit 
 
+iifile=`basename ${ifile}`; we_link=0
+[[ ! -f ${iifile} ]] && ln -s ${ifile} ${iifile} && ifile=${iifile} && we_link=1
+
 chkvar=`cdo showname ${ifile} | grep ${geo_var}`
 [[ ${chkvar} == "" ]] && echo "ERROR: Variable specified: ${geo_var}, not available!" && exit
 
@@ -56,6 +59,8 @@ ncks -O -3 lon.nc lon.nc3; rm lon.nc
 ncks -A -h -v lat lat.nc3 ${geo_var}_${ifile}
 ncks -A -h -v lon lon.nc3 ${geo_var}_${ifile}
 	rm l??.nc3
+
+[[ ${we_link} -eq 1 ]] && rm -rf ${ifile}
 
 echo "Job completed!"
 
